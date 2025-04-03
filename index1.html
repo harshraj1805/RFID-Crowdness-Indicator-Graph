@@ -53,7 +53,7 @@
     <canvas id="entryChart"></canvas>
     
     <script>
-        const API_URL = "https://docs.google.com/spreadsheets/d/1srmt2AA5F_QCiBLcM7lAmo9pln2nhfrW4NnI6OrtfKk/gviz/tq?tqx=out:json"; // Replace with your actual URL
+        const API_URL = "https://docs.google.com/spreadsheets/d/1FYRIj_kWXywLrJ9x-5Ir6hc_ZbglQWrVmhusMBq6ewg/gviz/tq?tqx=out:json"; // Replace with your actual URL
         const MAX_PEOPLE = 20;
 
         async function fetchData() {
@@ -105,33 +105,9 @@
                 crowdMessage.innerText = "It's crowded! Better to wait.";
             }
         }
+}
 
-        function updateChart(hourlyEntries) {
-            const labels = hourlyEntries.map((_, index) => `${index}:00 - ${index + 1}:00`);
-            const ctx = document.getElementById("entryChart").getContext("2d");
-            
-            new Chart(ctx, {
-                type: "bar",
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: "Total Entries per Hour",
-                        data: hourlyEntries,
-                        backgroundColor: "blue"
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            suggestedMax: Math.max(...hourlyEntries) + 5 // Adjust axis dynamically
-                        }
-                    }
-                }
-            });
-        }
-
-        setInterval(fetchData, 60000); // Update every 1 minute
+        setInterval(fetchData, 10000); // Update every 10 seconds
         fetchData();
     </script>
 </body>
